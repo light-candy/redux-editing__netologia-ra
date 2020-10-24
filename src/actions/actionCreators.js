@@ -9,8 +9,8 @@ export function addService(id, service, price) {
     return { type: ADD_SERVICE, payload:{ id, service, price } };
 }
 
-export function removeService(Id) {
-    return { type:REMOVE_SERVICE, payload: { Id } };
+export function removeService(id) {
+    return { type:REMOVE_SERVICE, payload: { id } };
 }
 
 export function changeServiceField(name, value) {
