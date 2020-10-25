@@ -1,6 +1,9 @@
 import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeServiceField, addService } from '../actions/actionCreators';
+import { changeServiceField,
+         clearServiceField,
+         addService
+       } from '../actions/actionCreators';
 import { nanoid } from 'nanoid';
 
 const selectServiceAdd = (state) => state.serviceAdd;
@@ -29,8 +32,7 @@ export function ServiceAdd() {
   const handleCancel = useCallback(
         (event) => {
             event.preventDefault();
-            dispatch(changeServiceField("name", ""));
-            dispatch(changeServiceField("price", ""));
+            dispatch(clearServiceField());
         },
         [dispatch]
   );
@@ -39,8 +41,8 @@ export function ServiceAdd() {
         <form onSubmit={handleSubmit}>
          <input name="name" onChange={handleChange} value={item.name} />
          <input name="price" onChange={handleChange} value={item.price} />
-         <button type="submit">Save</button>
-         <button onClick={handleCancel}>Cancel</button>
+         <button type="submit" disabled={item.name === "" && item.price === ""} className="button">Save</button>
+         <button onClick={handleCancel} className="button">Cancel</button>
         </form>
   );
 }
